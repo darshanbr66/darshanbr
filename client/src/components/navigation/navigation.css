@@ -1,0 +1,118 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  padding-block: 26px;
+  transition: padding 0.4s var(--ease-out), background 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+
+.nav--scrolled {
+  padding-block: 16px;
+  background: rgba(7, 8, 11, 0.7);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__brand {
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  color: var(--text);
+}
+
+.nav__links {
+  display: flex;
+  gap: 40px;
+}
+
+@media (max-width: 860px) {
+  .nav__links {
+    display: none;
+  }
+}
+
+.nav__link {
+  position: relative;
+  font-size: 14px;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+.nav__link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 1px;
+  background: var(--accent-strong);
+  transition: width 0.35s var(--ease-out);
+}
+
+.nav__link:hover {
+  color: var(--text);
+}
+.nav__link:hover::after {
+  width: 100%;
+}
+
+.nav__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  width: 28px;
+  z-index: 600;
+}
+
+.nav__toggle span {
+  height: 1px;
+  width: 100%;
+  background: var(--text);
+  transition: transform 0.35s var(--ease-out), opacity 0.3s ease;
+}
+
+.nav__toggle.is-open span:first-child {
+  transform: translateY(3.5px) rotate(45deg);
+}
+.nav__toggle.is-open span:last-child {
+  transform: translateY(-3.5px) rotate(-45deg);
+}
+
+@media (max-width: 860px) {
+  .nav__toggle {
+    display: flex;
+  }
+}
+
+.nav__mobile {
+  position: fixed;
+  inset: 0;
+  z-index: 550;
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav__mobile ul {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  text-align: center;
+}
+
+.nav__mobile button {
+  font-family: var(--font-display);
+  font-size: 42px;
+  color: var(--text);
+  letter-spacing: -0.02em;
+}

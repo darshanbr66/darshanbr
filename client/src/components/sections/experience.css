@@ -1,0 +1,126 @@
+.experience {
+  padding-block: 160px;
+  border-top: 1px solid var(--border);
+}
+
+.experience__timeline {
+  position: relative;
+  padding-left: 40px;
+}
+
+.experience__line {
+  position: absolute;
+  left: 5px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--accent-line), var(--border) 60%);
+}
+
+.experience__item {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.experience__node {
+  position: absolute;
+  left: -40px;
+  top: 8px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--accent-strong);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+
+.experience__card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px;
+  transition: border-color 0.4s ease;
+}
+.experience__card:hover {
+  border-color: var(--border-strong);
+}
+
+.experience__card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.experience__card-head h3 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+.experience__company {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.experience__period {
+  font-size: 12px;
+  color: var(--text-dim);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.experience__badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+
+.experience__summary {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  max-width: 640px;
+}
+
+.experience__responsibilities {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.experience__responsibilities li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.experience__responsibilities li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 6px;
+  height: 1px;
+  background: var(--accent-strong);
+}
+
+.experience__stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.experience__stack span {
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}

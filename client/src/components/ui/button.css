@@ -1,0 +1,32 @@
+.mbtn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 32px;
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  transition: background 0.35s var(--ease-out), border-color 0.35s var(--ease-out),
+    color 0.35s var(--ease-out);
+  will-change: transform;
+}
+
+.mbtn--primary {
+  background: var(--text);
+  color: var(--bg);
+}
+.mbtn--primary:hover {
+  background: var(--accent-strong);
+}
+
+.mbtn--ghost {
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+}
+.mbtn--ghost:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}

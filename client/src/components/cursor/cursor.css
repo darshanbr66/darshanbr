@@ -1,0 +1,92 @@
+.cursor-root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cursor-root.is-visible {
+  opacity: 1;
+}
+
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-strong);
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, width, height;
+  transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out), background 0.4s var(--ease-out);
+}
+
+.cursor-root.is-down .cursor-ring {
+  width: 34px;
+  height: 34px;
+}
+
+.cursor-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+
+.cursor-root[data-variant='link'] .cursor-ring {
+  width: 64px;
+  height: 64px;
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+}
+
+.cursor-root[data-variant='view'] .cursor-ring,
+.cursor-root[data-variant='explore'] .cursor-ring {
+  width: 96px;
+  height: 96px;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--accent-line);
+  backdrop-filter: blur(2px);
+}
+
+.cursor-root[data-variant='view'] .cursor-label,
+.cursor-root[data-variant='explore'] .cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cursor-root[data-variant='hidden'] {
+  opacity: 0 !important;
+}
+
+.cursor-root[data-variant='drag'] .cursor-ring {
+  width: 80px;
+  height: 80px;
+  border-color: var(--accent-line);
+}
+.cursor-root[data-variant='drag'] .cursor-label {
+  opacity: 1;
+  transform: scale(1);
+}

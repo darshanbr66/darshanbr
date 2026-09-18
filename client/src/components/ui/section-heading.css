@@ -1,0 +1,20 @@
+.section-heading {
+  margin-bottom: 56px;
+}
+
+.section-heading--center {
+  text-align: center;
+}
+
+.section-heading__eyebrow {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--accent-strong);
+  margin-bottom: 14px;
+}
+
+.section-heading__title {
+  font-size: clamp(32px, 4.5vw, 56px);
+  letter-spacing: -0.02em;
+}
