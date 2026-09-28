@@ -2,17 +2,21 @@ const mongoose = require('mongoose')
 
 const experienceSchema = new mongoose.Schema(
   {
-    role: { type: String, required: true },
-    company: { type: String, required: true },
-    location: { type: String, required: true },
-    period: { type: String, required: true },
+    role: { type: String, required: [true, 'Role is required'], trim: true },
+    company: { type: String, required: [true, 'Company is required'], trim: true },
+    location: { type: String, default: '', trim: true },
+    startDate: { type: String, default: '', trim: true },
+    endDate: { type: String, default: '', trim: true },
     current: { type: Boolean, default: false },
-    summary: { type: String, required: true },
+    description: { type: String, default: '', trim: true },
     responsibilities: { type: [String], default: [] },
-    stack: { type: [String], default: [] },
+    technologies: { type: [String], default: [] },
+    status: { type: String, enum: ['published', 'draft'], default: 'published' },
     order: { type: Number, default: 0 },
   },
   { timestamps: true }
 )
+
+experienceSchema.index({ order: 1 })
 
 module.exports = mongoose.model('Experience', experienceSchema)

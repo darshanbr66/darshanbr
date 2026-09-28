@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import CursorTarget from '../ui/CursorTarget'
+import { useSiteData } from '../../context/SiteDataContext'
 import './navigation.css'
 
 const LINKS = [
@@ -16,6 +17,7 @@ export default function Navigation() {
   const [menuOpen, setMenuOpen] = useState(false)
   const location = useLocation()
   const navigate = useNavigate()
+  const { profile } = useSiteData()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -47,7 +49,7 @@ export default function Navigation() {
         <div className="nav__inner container">
           <CursorTarget variant="link" label="HOME">
             <Link to="/" className="nav__brand mono">
-              DARSHAN B R
+              {profile.name.toUpperCase()}
             </Link>
           </CursorTarget>
 

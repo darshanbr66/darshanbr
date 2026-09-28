@@ -47,6 +47,35 @@
   mask-image: radial-gradient(ellipse at center, black 20%, transparent 75%);
 }
 
+/* Wide art needs a larger monogram than the showcase card. */
+.project-detail__visual-surface .project-art__monogram {
+  font-size: clamp(140px, 22vw, 360px);
+}
+
+.project-detail__facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 24px;
+  margin: 40px 0 0;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+.project-detail__facts > div {
+  padding-left: 16px;
+  border-left: 1px solid var(--border-strong);
+}
+.project-detail__facts dt {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.project-detail__facts dd {
+  margin: 0;
+  font-size: 15px;
+  color: var(--text);
+}
+
 .project-detail__body {
   display: grid;
   grid-template-columns: 1.4fr 0.9fr;
@@ -157,4 +186,66 @@
 }
 .project-detail__next-link:hover {
   color: var(--accent-strong);
+}
+
+.project-detail__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-detail__col p {
+  white-space: pre-line;
+}
+
+.project-detail--state {
+  min-height: 80svh;
+  padding-top: 140px;
+  padding-bottom: 80px;
+}
+.project-detail--state h1 {
+  font-size: clamp(32px, 5vw, 60px);
+  margin-bottom: 16px;
+}
+.project-detail__state-text {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.project-detail__gallery {
+  padding-bottom: 100px;
+}
+.project-detail__gallery h2 {
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+.project-detail__gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.project-detail__gallery-item {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.project-detail__gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+.project-detail__gallery-item:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 600px) {
+  .project-detail__visual-surface {
+    aspect-ratio: 4 / 3;
+  }
 }

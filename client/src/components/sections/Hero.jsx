@@ -2,14 +2,19 @@ import { lazy, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import RevealText from '../animations/RevealText'
 import MagneticButton from '../ui/MagneticButton'
-import { profile } from '../../data/profile'
+import { useSiteData } from '../../context/SiteDataContext'
+import { resumeFileUrl } from '../../services/api'
 import './hero.css'
 
 const HeroScene = lazy(() => import('../three/HeroScene'))
 
 export default function Hero() {
+  const { profile, content, resume } = useSiteData()
+  const hero = content.hero
   const scrollToWork = () => document.querySelector('#work')?.scrollIntoView({ behavior: 'smooth' })
   const scrollToContact = () => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+
+  const eyebrow = [profile.role, profile.headline || profile.title].filter(Boolean).join(' — ')
 
   return (
     <section className="hero" id="hero">
@@ -28,23 +33,27 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         >
-          {profile.role.toUpperCase()} — {profile.specialization.toUpperCase()}
+          {eyebrow.toUpperCase()}
         </motion.p>
 
         <h1 className="hero__title">
-          <RevealText text="I BUILD DIGITAL" as="span" className="hero__line" stagger={0.05} />
-          <RevealText text="EXPERIENCES." as="span" className="hero__line hero__line--accent" stagger={0.05} />
+          <span className="sr-only">{profile.name} — </span>
+          <RevealText text={hero.titleLine1} as="span" className="hero__line" stagger={0.05} />
+          {hero.titleLine2 && (
+            <RevealText text={hero.titleLine2} as="span" className="hero__line hero__line--accent" stagger={0.05} />
+          )}
         </h1>
 
-        <motion.p
-          className="hero__sub"
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        >
-          Full-stack developer specializing in React, Node.js, Express and MongoDB —
-          {' '}{profile.yearsExperience}+ years building modern, scalable web applications.
-        </motion.p>
+        {profile.description && (
+          <motion.p
+            className="hero__sub"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {profile.description}
+          </motion.p>
+        )}
 
         <motion.div
           className="hero__actions"
@@ -53,11 +62,16 @@ export default function Hero() {
           transition={{ delay: 1.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <MagneticButton onClick={scrollToWork} variant="primary" cursorLabel="VIEW">
-            Explore My Work
+            {hero.exploreWorkLabel}
           </MagneticButton>
           <MagneticButton onClick={scrollToContact} variant="ghost" cursorLabel="GO">
-            Let's Connect
+            {hero.contactLabel}
           </MagneticButton>
+          {resume && (
+            <MagneticButton href={resumeFileUrl} variant="ghost" cursorLabel="OPEN">
+              Resume
+            </MagneticButton>
+          )}
         </motion.div>
       </div>
 
@@ -67,7 +81,7 @@ export default function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1 }}
       >
-        <span>SCROLL TO EXPLORE</span>
+        <span>{hero.scrollLabel.toUpperCase()}</span>
         <span className="hero__scroll-line" />
       </motion.div>
     </section>

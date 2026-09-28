@@ -20,11 +20,27 @@
   justify-content: center;
 }
 
+/* Small screens: keep the orbit's real geometry (rings are positioned in px)
+   and scale it as a whole; negative margins remove the untransformed space. */
 @media (max-width: 720px) {
+  /* Clip at the screen edge rather than the container padding. */
+  .skills {
+    overflow: hidden;
+  }
+  .skills__orbit-wrap {
+    padding-block: 0;
+  }
   .skills__orbit {
-    width: 100%;
-    height: 460px;
-    transform: scale(0.72);
+    --orbit-scale: 0.7;
+    flex: 0 0 640px;
+    max-width: none;
+    transform: scale(var(--orbit-scale));
+    margin-block: calc(-640px * (1 - var(--orbit-scale)) / 2);
+  }
+}
+@media (max-width: 520px) {
+  .skills__orbit {
+    --orbit-scale: 0.52;
   }
 }
 
@@ -94,4 +110,32 @@
 .skills__hint {
   color: var(--text-dim);
   font-size: 14px;
+}
+
+.skills__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.skills__chip.is-featured {
+  color: var(--text);
+  border-color: var(--accent-line);
+}
+
+.skills__chip-icon {
+  width: 14px;
+  height: 14px;
+  font-size: 12px;
+  line-height: 14px;
+  object-fit: contain;
+}
+
+.skills__detail-category {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--accent-strong);
+  margin-bottom: 8px;
+  text-transform: uppercase;
 }

@@ -1,0 +1,34 @@
+# Render Blueprint for the Express API (the React client is deployed on Vercel).
+# Secrets use `sync: false`: Render asks for their values when the Blueprint is
+# created and never reads them from this file.
+services:
+  - type: web
+    name: darshan-portfolio-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+      - key: CLIENT_URL
+        value: https://darshanbr.vercel.app
+      - key: CORS_ORIGIN
+        value: https://darshanbr.vercel.app
+      - key: JWT_EXPIRES_IN
+        value: 12h
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: CONTACT_NOTIFICATION_EMAIL
+        sync: false

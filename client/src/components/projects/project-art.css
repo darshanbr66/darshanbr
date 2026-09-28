@@ -1,0 +1,158 @@
+.project-art {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 62% 46%, var(--art-glow), transparent 55%),
+    radial-gradient(circle at 10% 100%, rgba(255, 255, 255, 0.03), transparent 40%);
+}
+
+.project-art__svg {
+  position: absolute;
+  inset: -4%;
+  width: 108%;
+  height: 108%;
+}
+
+/* Parallax: --px / --py (-1…1) are set by the parent on pointer move. */
+.project-art__layer {
+  transition: transform 0.6s var(--ease-out);
+}
+.project-art__layer--back {
+  transform: translate(calc(var(--px, 0) * -6px), calc(var(--py, 0) * -6px));
+}
+.project-art__layer--mid {
+  transform: translate(calc(var(--px, 0) * 8px), calc(var(--py, 0) * 8px));
+}
+.project-art__layer--front {
+  transform: translate(calc(var(--px, 0) * 16px), calc(var(--py, 0) * 16px));
+}
+
+.project-art__monogram {
+  position: absolute;
+  left: 6%;
+  top: 4%;
+  font-family: var(--font-display);
+  font-size: clamp(120px, 16vw, 230px);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.09);
+  transform: translate(calc(var(--px, 0) * -12px), calc(var(--py, 0) * -12px));
+  transition: transform 0.8s var(--ease-out), -webkit-text-stroke-color 0.6s ease;
+  user-select: none;
+}
+.project-panel__visual:hover .project-art__monogram {
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.16);
+}
+
+/* Each orbit group is symmetric around its origin, so its box centre is the pivot. */
+.project-art__orbit {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: art-spin var(--speed) linear infinite;
+}
+.project-art__orbit--reverse {
+  animation-direction: reverse;
+}
+.project-art__orbit-path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 0.8;
+  stroke-dasharray: 2 5;
+}
+.project-art__satellite {
+  fill: var(--art-b);
+  filter: drop-shadow(0 0 4px var(--art-a));
+}
+
+.project-art__link {
+  stroke: rgba(255, 255, 255, 0.12);
+  stroke-width: 0.8;
+}
+.project-art__pulse {
+  stroke: var(--art-b);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 6 400;
+  stroke-dashoffset: 400;
+  opacity: 0.9;
+  animation: art-pulse 4.5s linear infinite;
+}
+
+.project-art__core {
+  fill: var(--bg);
+  stroke: var(--art-b);
+  stroke-width: 1.4;
+}
+.project-art__core-glow {
+  animation: art-breathe 4s ease-in-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+.project-art__node {
+  fill: var(--bg);
+  stroke: var(--art-a);
+  stroke-width: 1.2;
+  animation: art-blink 3.2s ease-in-out infinite;
+}
+
+.project-art__scan {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20%;
+  height: 20%;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.035), transparent);
+  animation: art-scan 7s var(--ease-in-out) infinite;
+  pointer-events: none;
+}
+
+@keyframes art-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes art-pulse {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes art-breathe {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+@keyframes art-blink {
+  0%,
+  100% {
+    stroke-opacity: 0.55;
+  }
+  50% {
+    stroke-opacity: 1;
+    fill: var(--art-a);
+  }
+}
+@keyframes art-scan {
+  to {
+    top: 110%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-art *,
+  .project-art__scan {
+    animation: none !important;
+  }
+  .project-art__layer,
+  .project-art__monogram {
+    transform: none;
+  }
+}

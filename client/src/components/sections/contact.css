@@ -70,3 +70,12 @@
 .contact__status.is-error {
   color: #e5484d;
 }
+
+.contact__hp {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  opacity: 0;
+}

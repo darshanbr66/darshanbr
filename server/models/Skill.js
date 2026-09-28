@@ -1,13 +1,18 @@
 const mongoose = require('mongoose')
 
-const skillCategorySchema = new mongoose.Schema(
+const skillSchema = new mongoose.Schema(
   {
-    categoryId: { type: String, required: true, unique: true },
-    label: { type: String, required: true },
-    skills: { type: [String], default: [] },
+    name: { type: String, required: [true, 'Skill name is required'], trim: true, maxlength: 80 },
+    category: { type: String, default: 'Other', trim: true, maxlength: 60 },
+    icon: { type: String, default: '', trim: true },
+    description: { type: String, default: '', trim: true, maxlength: 400 },
+    featured: { type: Boolean, default: false },
+    status: { type: String, enum: ['published', 'draft'], default: 'published' },
     order: { type: Number, default: 0 },
   },
   { timestamps: true }
 )
 
-module.exports = mongoose.model('SkillCategory', skillCategorySchema)
+skillSchema.index({ order: 1 })
+
+module.exports = mongoose.model('Skill', skillSchema)

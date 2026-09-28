@@ -5,3 +5,17 @@ build/
 .env.local
 *.log
 .DS_Store
+
+# Local database backups (contain personal data)
+server/backups/
+
+# Local admin credentials (never commit)
+ADMIN_CREDENTIALS.md
+
+# Any local env variant (keep the committed examples)
+.env.*
+!.env.example
+*.local
+
+# Local dev logs
+*_dev.log

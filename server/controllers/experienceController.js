@@ -1,12 +1,23 @@
 const Experience = require('../models/Experience')
+const { createCrud } = require('../utils/crud')
 
-async function getExperience(req, res, next) {
-  try {
-    const experience = await Experience.find().sort({ order: 1 })
-    res.json(experience)
-  } catch (err) {
-    next(err)
-  }
-}
-
-module.exports = { getExperience }
+module.exports = createCrud(Experience, {
+  label: 'Experience',
+  fields: [
+    'role',
+    'company',
+    'location',
+    'startDate',
+    'endDate',
+    'current',
+    'description',
+    'responsibilities',
+    'technologies',
+    'status',
+    'order',
+  ],
+  prepare(data) {
+    if (data.current === true) data.endDate = ''
+    return data
+  },
+})

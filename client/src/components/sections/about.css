@@ -88,3 +88,11 @@
   line-height: 1.6;
   max-width: 520px;
 }
+
+.about__grid--meta-only {
+  grid-template-columns: 1fr;
+}
+
+.about__text {
+  white-space: pre-line;
+}
